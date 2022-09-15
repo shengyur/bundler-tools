@@ -1,29 +1,26 @@
-import "./style.css"
-import ImgPng from './myImg.png'
+import './style.css'
+import ImgPng from './myImg.png?version=2022'
 import printMe from './print.js'
-import "./sass.scss"
-import "./less.less"
+import './sass.scss'
+import './less.less'
 
-// console.log('ENV',process.env.NODE_ENV)
+function component () {
+  const element = document.createElement('div')
+  const btn = document.createElement('button')
 
-function component() {
-    const element = document.createElement('div');
-    const btn = document.createElement('button');
-  
-    // Lodash, currently included via a script, is required for this line to work
-    element.innerHTML = Array.prototype.join(['Hello', 'webpack'], ' ');
-  
+  // Lodash, currently included via a script, is required for this line to work
+  element.innerHTML = Array.prototype.join(['Hello', 'webpack'], ' ')
 
-    btn.innerHTML = `Click me and check the console!${process.env.NODE_ENV}}`;
-    btn.onclick = printMe;
-  
-    element.appendChild(btn);
+  btn.innerHTML = `Click me and check the console!${process.env.NODE_ENV}}`
+  btn.onclick = printMe
 
-    const Img = new Image()
-    Img.src = ImgPng
-    element.appendChild(Img)
+  element.appendChild(btn)
 
-    return element;
+  const Img = new Image()
+  Img.src = ImgPng
+  element.appendChild(Img)
+
+  return element
 }
-  
-document.body.appendChild(component());
+
+document.body.appendChild(component())
