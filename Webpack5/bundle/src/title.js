@@ -1,4 +1,4 @@
 module.exports = {
-    name: 'title_name',
-    age: 'title_age',
+    cat: 'title_cat',
+    dog: 'title_dog',
 }
