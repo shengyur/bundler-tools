@@ -1,7 +1,8 @@
 const { SyncHook }  = require('tapable')
+const Compilation = require('./Compilation')
 
 class Compiler{
-    constructor(){
+    constructor(options){
         this.options = options
 
         this.hooks = {
