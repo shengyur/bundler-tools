@@ -2,8 +2,8 @@ const path = require('path')
 const baseDir = process.cwd()
 const fs = require('fs')
 const parser = require('@babel/parser')
-const generate = require('@babel/generage')
-const types = require('@babel/types')
+// const generate = require('@babel/generage')
+// const types = require('@babel/types')
 const traverse = require('@babel/traverse').default
 
 
@@ -87,26 +87,41 @@ class Compilation {
         })
 
         traverse(ast, {
+            // 捕获处理 expression
             CallExpression({node}){
                 if(node.callee.name === 'require'){
+                    // 如果调用的是 require 方法，拿到模块名称
                     let depModuleName = node.arguments[0].value
+                    // 处理相对路径
                     if(depModuleName.startWith('.')) {
-                        //自定义模块
+                        // 当前模块相对根目录的相对路径
                         const currentDir = path.posix.dirname(modulePath)
-
-                        let depModuleName = path.posix.join(currentDir, depModuleName)
+                        console.log('currentDir', currentDir)
+                        // 找出相对路径
+                        let depModulePath = path.posix.join(currentDir, depModuleName)
 
                         const extensions = this.options.resolve.extensions
+
+                        depModulePath= tryExtensions(depModulePath,extensions)
                     } else {
-                        // 第三方模块
+                    // 处理第三方模块
                         let depModulePath = require.resolve(depModuleName)
                     }
                 }
             }
         })
 
-        
+        // 使用改造后的 ast 重新生成新的源代码
     }
 }
+// TODO:
+function tryExtensions(modulePath, extensions){
+    if(fs.existsSync(modulePath)){
+        return modulePath
+    }else {
+
+    }
+}
+
 
 module.exports = Compilation

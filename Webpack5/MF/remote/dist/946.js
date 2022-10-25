@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_basic_host_remote_app2=self.webpackChunk_basic_host_remote_app2||[]).push([[946],{946:(e,s,t)=>{t.r(s),t.d(s,{default:()=>c});var a=t(369),_=t.n(a);const c=()=>_().createElement("div",null,"新闻列表")}}]);
